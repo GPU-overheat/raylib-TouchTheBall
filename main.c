@@ -1,16 +1,5 @@
-#include "raylib.h"
-#include <math.h>
+#include "ttb.h"
 
-#define BASE_SPEED 800.0f
-
-typedef enum {
-    GAME_START,
-    GAME_RUNNING,
-    GAME_OVER
-} GameState;
-
-void move_input(Vector2 *pos, int screenWidth, int screenHeight, float radius, float speed);
-void write_gui(Vector2 *pos, float speed, int count, int highscore, float timer, bool display_gui);
 
 int main(void)
 {
@@ -29,15 +18,17 @@ int main(void)
     Vector2 explosionCenter = { 0.0f, 0.0f };
     float explosionAlpha = 1.0f;
 
-    InitWindow(screenWidth, screenHeight, "Touch-the-ball");
-    SetTargetFPS(60);
-
     Vector2 pos = { 10.0f, 10.0f };
     Vector2 target = { 400.0f, 300.0f };
     float radius = 30.0f;
     Color mainCircleColor = RED;
     Color dis = BLUE;
-    const char* colorName = "RED";
+    char* colorName = "RED";
+    
+    InitWindow(screenWidth, screenHeight, "Touch-the-ball");
+    SetTargetFPS(60);
+
+
 
     while (!WindowShouldClose())
     {
@@ -158,39 +149,3 @@ int main(void)
     CloseWindow();
     return 0;
 }
-
-void write_gui(Vector2 *pos, float speed, int count, int highscore, float timer, bool display_gui)
-{
-    if (display_gui)
-    {
-        DrawText(TextFormat("pos x: %d", (int)pos->x), 100, 200, 20, GRAY);
-        DrawText(TextFormat("pos y: %d", (int)pos->y), 100, 230, 20, GRAY);
-    }
-    DrawText(TextFormat("speed: %d", (int)speed - (int)BASE_SPEED), 100, 260, 20, GRAY);
-    DrawText(TextFormat("count: %d", count), 100, 290, 20, GRAY);
-    DrawText(TextFormat("highest: %d", highscore), 100, 350, 20, GRAY);
-    DrawText(TextFormat("timer: %.1f", timer), 100, 320, 20, GRAY);
-}
-
-void move_input(Vector2 *pos, int screenWidth, int screenHeight, float radius, float speed)
-{
-    float deltaTime = GetFrameTime();
-
-    if ((IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) && pos->x < screenWidth - radius)
-    {
-        pos->x += speed * deltaTime;
-    }
-    if ((IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) && pos->x > radius)
-    {
-        pos->x -= speed * deltaTime;
-    }
-    if ((IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) && pos->y < screenHeight - radius)
-    {
-        pos->y += speed * deltaTime;
-    }
-    if ((IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) && pos->y > radius)
-    {
-        pos->y -= speed * deltaTime;
-    }
-}
-
