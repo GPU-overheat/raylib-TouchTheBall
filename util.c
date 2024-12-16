@@ -1,6 +1,5 @@
 #include "ttb.h"
 
-
 void write_gui(Vector2 *pos, float speed, int count, int highscore, float timer, bool display_gui)
 {
     if (display_gui)
@@ -14,25 +13,24 @@ void write_gui(Vector2 *pos, float speed, int count, int highscore, float timer,
     DrawText(TextFormat("timer: %.1f", timer), 100, 320, 20, GRAY);
 }
 
-void move_input(Vector2 *pos, int screenWidth, int screenHeight, float radius, float speed)
+void move_input(Vector2 *pos, int screenW, int screenH, float radius, float speed)
 {
     float delta = GetFrameTime();
 
-    if ((IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) && pos->x < screenWidth - radius)
+    if ((IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) && pos->x < screenW - radius)
     {
-      pos->x += speed * delta;
+        pos->x += speed * delta;
     }
     if ((IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) && pos->x > radius)
     {
-      pos->x -= speed * delta;
+        pos->x -= speed * delta;
     }
-    if ((IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) && pos->y < screenHeight - radius)
+    if ((IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) && pos->y < screenH - radius)
     {
-      pos->y += speed * delta;
+        pos->y += speed * delta;
     }
     if ((IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) && pos->y > radius)
     {
-      pos->y -= speed * delta;
+        pos->y -= speed * delta;
     }
 }
-

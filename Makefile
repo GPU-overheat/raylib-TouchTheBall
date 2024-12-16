@@ -1,8 +1,8 @@
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra
 LDFLAGS = -lraylib -lm
 
-SRC = main.c util.c
+SRC = main.c util.c startWindow.c
 OBJ = $(SRC:.c=.o)
 
 EXEC = run
@@ -15,5 +15,5 @@ $(EXEC): $(OBJ)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-clean:
+cl:
 	rm -f $(OBJ) $(EXEC)
